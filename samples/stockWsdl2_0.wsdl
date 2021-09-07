@@ -1,0 +1,95 @@
+<!-- Root element is description instead of declarations -->
+<description xmlns="http://www.w3.org/ns/wsdl"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:wsoap="http://www.w3.org/ns/wsdl/soap"
+             xmlns:wsdlx="http://www.w3.org/ns/wsdl-extensions"
+             xmlns:tns="http://warehouse.rf.com/"
+             targetNamespace="http://warehouse.rf.com/">
+
+   <documentation>
+      This document describes the Stock Web service.
+   </documentation>
+  
+   <types>
+      <xsd:schema>
+         <xsd:import schemaLocation="stock.xsd" namespace="http://warehouse.rf.com/" />
+      </xsd:schema>
+   </types> 
+
+   <interface name="Stock">
+   
+       <operation name="getStockItemsWithQuantityLessThan" 
+             pattern="http://www.w3.org/ns/wsdl/in-out" 
+             style="http://www.w3.org/ns/wsdl/style/rpc"
+             wsdlx:safe="true">
+           <input messageLabel="In" 
+                  element="tns:getStockItemsWithQuantityLessThan" />
+           <output messageLabel="Out" 
+                   element="tns:getStockItemsWithQuantityLessThanResponse" />
+       </operation>
+       
+       <!-- pattern: Message Exchange pattern:
+	       		in-out: receiver responds with either a reply message or a fault
+	       		in-only: no reply of any kind (i.e., no faults)
+	       		robust-in-only:  no reply unless there's a fault
+	       
+            style=".../rpc": child of <Body> has name of operation and is defined as 
+                a complex type; child of <Body> has no local attributes; elements 
+                within child of <Body> have unique names; etc.
+                (In the bad old rpc/encoded services, style="rpc" wasn't the problem,
+                it just defined the wrapper element; use="encoded" was the problem.)
+                Other choices for style: 
+                    ".../iri" IRI-style: operation inputs must be simple types only, so 
+                        they can be encoded in the endpoint IRI/URI for an HTTP GET
+                    ".../multipart" multi-part MIME messages
+
+             wsdlx:safe="true": this operation will not obligate the sender in any way 
+                 (such as agreeing to buy something)
+
+             messageLabel: if the message exchange pattern involves multiple messages, 
+                 the messageLabel indicates which input message this <input> applies to. 
+                 For the in-out MEP, messageLabels are always "In" and "Out".
+	             messageLabel is used to connect a fault to a reply message -->
+
+       <operation name="getStockItemsWithQuantityBetween" 
+             pattern="http://www.w3.org/ns/wsdl/in-out" 
+             style="http://www.w3.org/ns/wsdl/style/rpc"
+             wsdlx:safe="true">
+           <input messageLabel="In" 
+                  element="tns:getStockItemsWithQuantityBetween" />
+           <output messageLabel="Out" 
+                   element="tns:getStockItemsWithQuantityBetweenResponse" />
+       </operation>
+
+       <operation name="isInStock" 
+             pattern="http://www.w3.org/ns/wsdl/in-out" 
+             style="http://www.w3.org/ns/wsdl/style/rpc"
+             wsdlx:safe="true">
+           <input messageLabel="In" element="tns:isInStock" />
+           <output messageLabel="Out" element="tns:isInStock" />
+       </operation>
+    </interface>
+
+    <binding name="StockSoapBinding" 
+           interface="tns:Stock"
+           type="http://www.w3.org/ns/wsdl/soap"
+           wsoap:protocol="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+
+	    <operation ref="tns:getStockItemsWithQuantityLessThan" 
+	        wsoap:mep="http://www.w3.org/2003/05/soap/mep/soap-response"/>
+	
+	    <operation ref="tns:getStockItemsWithQuantityBetween" 
+	        wsoap:mep="http://www.w3.org/2003/05/soap/mep/soap-response"/>
+	
+	    <operation ref="tns:isInStock" 
+	        wsoap:mep="http://www.w3.org/2003/05/soap/mep/soap-response"/>
+	
+  </binding>
+    
+  <service name="StockService" interface="tns:Stock">
+      <endpoint name="StockEndpoint"
+                binding="tns:StockSoapBinding"
+                address="http://localhost:8080/warehouse/stock.ws"/>
+  </service>
+  
+</description>

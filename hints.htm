@@ -1,0 +1,105 @@
+<html>
+<body>
+<h2> Hints for Exercise 2.1 </h2>
+
+<h3>stock.wsdl</h3>
+
+<pre><font color="grey">
+&lt;!--  TODO: Note the missing &lt;definitions&gt; attribute values:
+            1. name
+            2. target namespace
+      You'll set these attributes using using the graphical WSDL editor --&gt;
+&lt;definitions </font><font color="blue"> 
+        name="StockService"
+        targetNamespace="http://warehouse.rf.com" </font><font color="grey">
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://warehouse.rf.com"&gt;
+
+    &lt;types&gt;
+        &lt;xsd:schema&gt;
+            &lt;!--  TODO: Import schema 'stock.xsd' 
+                        Set schemaLocation to "stock.xsd"
+                        Set namespace to "http://warehouse.rf.com/" --&gt; </font><font color="blue">
+            &lt;xsd:import schemaLocation="stock.xsd"
+                        namespace="http://warehouse.rf.com/"&gt;
+            &lt;/xsd:import&gt; </font><font color="grey">
+        &lt;/xsd:schema&gt;
+    &lt;/types&gt;</pre>
+<font color="grey"><pre>    &lt;!--  TODO: Declare request message for 'getStockItemsWithQuantityBetween' -->    </pre></font>
+<font color="blue"><pre>    &lt;message name="getStockItemsWithQuantityBetween"></pre></font>
+<font color="blue"><pre>        &lt;part element="tns:getStockItemsWithQuantityBetween" name="parameters"/></pre></font>
+<font color="blue"><pre>    &lt;/message></pre></font>
+<font color="grey"><pre>    &lt;!--  TODO: Declare response message for 'getStockItemsWithQuantityBetween' -->        </pre></font>
+<font color="blue"><pre>    &lt;message name="getStockItemsWithQuantityBetweenResponse"></pre></font>
+<font color="blue"><pre>        &lt;part element="tns:getStockItemsWithQuantityBetweenResponse" name="parameters"/></pre></font>
+<font color="blue"><pre>    &lt;/message></pre></font>
+<font color="grey"><pre>    &lt;!--  TODO: Declare request message for 'isInStock' -->    </pre></font>
+<font color="blue"><pre>    &lt;message name="isInStock"></pre></font>
+<font color="blue"><pre>        &lt;part element="tns:isInStock" name="parameters"/></pre></font>
+<font color="blue"><pre>    &lt;/message></pre></font>
+<font color="grey"><pre>    &lt;!--  TODO: Declare response message for 'isInStock' -->        </pre></font>
+<font color="blue"><pre>    &lt;message name="isInStockResponse"></pre></font>
+<font color="blue"><pre>        &lt;part element="tns:isInStockResponse" name="parameters"/></pre></font>
+<font color="blue"><pre>    &lt;/message></pre></font>
+<font color="grey"><pre>    &lt;!--  TODO: Add the missing two operations here --></pre></font>
+<font color="grey"><pre>    &lt;portType name="Stock"></pre></font>
+<font color="grey"><pre>        &lt;operation name="getStockItemsWithQuantityLessThan"></pre></font>
+<font color="grey"><pre>            &lt;input message="tns:getStockItemsWithQuantityLessThan" /></pre></font>
+<font color="grey"><pre>            &lt;output message="tns:getStockItemsWithQuantityLessThanResponse" /></pre></font>
+<font color="grey"><pre>        &lt;/operation></pre></font>
+<font color="blue"><pre>        &lt;operation name="getStockItemsWithQuantityBetween"></pre></font>
+<font color="blue"><pre>            &lt;input message="tns:getStockItemsWithQuantityBetween" /></pre></font>
+<font color="blue"><pre>            &lt;output message="tns:getStockItemsWithQuantityBetweenResponse" /></pre></font>
+<font color="blue"><pre>        &lt;/operation></pre></font>
+<font color="blue"><pre>        &lt;operation name="isInStock"></pre></font>
+<font color="blue"><pre>            &lt;input message="tns:isInStock" /></pre></font>
+<font color="blue"><pre>            &lt;output message="tns:isInStockResponse" /></pre></font>
+<font color="blue"><pre>        &lt;/operation></pre></font>
+<font color="grey"><pre>    &lt;/portType></pre></font>
+<font color="grey"><pre>    &lt;binding name="StockPortBinding" type="tns:Stock"></pre></font>
+<font color="grey"><pre>        &lt;!--  TODO: Note 'document' style and 'soap' transport --></pre></font>
+<font color="grey"><pre>        &lt;soap:binding style="document"</pre></font>
+<font color="grey"><pre>                      transport="http://schemas.xmlsoap.org/soap/http"/></pre></font>
+<font color="grey"><pre>        &lt;operation name="getStockItemsWithQuantityLessThan"></pre></font>
+<font color="grey"><pre>            &lt;soap:operation soapAction="" /></pre></font>
+<font color="grey"><pre>            &lt;input></pre></font>
+<font color="grey"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="grey"><pre>            &lt;/input></pre></font>
+<font color="grey"><pre>            &lt;output></pre></font>
+<font color="grey"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="grey"><pre>            &lt;/output></pre></font>
+<font color="grey"><pre>        &lt;/operation></pre></font>
+<font color="grey"><pre>        &lt;!--  TODO: Add the two missing operations here --></pre></font>
+<font color="blue"><pre>        &lt;operation name="getStockItemsWithQuantityBetween"></pre></font>
+<font color="blue"><pre>            &lt;soap:operation soapAction="" /></pre></font>
+<font color="blue"><pre>            &lt;input></pre></font>
+<font color="blue"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="blue"><pre>            &lt;/input></pre></font>
+<font color="blue"><pre>            &lt;output></pre></font>
+<font color="blue"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="blue"><pre>            &lt;/output></pre></font>
+<font color="blue"><pre>        &lt;/operation></pre></font>
+<font color="blue"><pre>        &lt;operation name="isInStock"></pre></font>
+<font color="blue"><pre>            &lt;soap:operation soapAction="" /></pre></font>
+<font color="blue"><pre>            &lt;input></pre></font>
+<font color="blue"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="blue"><pre>            &lt;/input></pre></font>
+<font color="blue"><pre>            &lt;output></pre></font>
+<font color="blue"><pre>                &lt;soap:body use="literal" /></pre></font>
+<font color="blue"><pre>            &lt;/output></pre></font>
+<font color="blue"><pre>        &lt;/operation></pre></font>
+<font color="grey"><pre>    &lt;/binding></pre></font>
+<font color="grey"><pre>    &lt;!--  TODO: Specify that service, port, binding are </pre></font>
+<font color="grey"><pre>          at http://localhost:8080/warehouse/stock --></pre></font>
+<font color="blue"><pre>    &lt;service name="StockService"></pre></font>
+<font color="grey"><pre>        &lt;port name="StockPort"</pre></font>
+<font color="blue"><pre>            binding="tns:StockPortBinding"></pre></font>
+<font color="blue"><pre>            &lt;soap:address location="http://localhost:8080/warehouse/stock" /></pre></font>
+<font color="grey"><pre>        &lt;/port></pre></font>
+<font color="grey"><pre>    &lt;/service></pre></font>
+<font color="grey"><pre>&lt;/definitions&gt;</pre></font>
+
+</body>
+</html>

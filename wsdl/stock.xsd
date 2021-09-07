@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Done: (21.01) This schema will define elements in namespace http://warehouse.rf.com/ -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://warehouse.rf.com/"
+	xmlns:tns="http://warehouse.rf.com/" 
+	elementFormDefault="qualified" 
+	version="1.0">
+
+	<!-- TODO: Examine the wrapper element for the request message for the
+	           getStockItemsWithQuantityLessThan operation.
+	           (no changes required) -->
+	
+	<element name="getStockItemsWithQuantityLessThan">
+		<complexType>
+			<sequence>
+				<element name="threshold" type="xsd:int"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<!-- Example:
+	   <Envelope ...>
+	       <Body>
+	           <getStockItemsWithQuantityLessThan>
+	           		<threshold>5</threshold>
+	           </getStockItemsWithQuantityLessThan>
+	       </Body>
+	   </Envelope>
+	-->
+
+	<!-- TODO: Examine the wrapper element for the response message for the
+	           getStockItemsWithQuantityLessThan operation.
+	           (no changes required) -->
+    
+	<element name="getStockItemsWithQuantityLessThanResponse">
+		<complexType>
+			<sequence>
+				<element name="stockList" type="tns:stockListType"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<!-- Example:
+	   <Envelope ...>
+	       <Body>
+	           <getStockItemsWithQuantityLessThanResponse>
+	           		<stockList>
+	           			<product>
+	           				<productId>54321</productId>
+	           				<quantity>4</quantity>
+	           			</product>
+	           		</stockList>
+	           </getStockItemsWithQuantityLessThanResponse>
+	       </Body>
+	   </Envelope>
+     -->
+
+	<!-- TODO: Examine the complex type for the child of response body
+	           of the getStockItemsWithQuantityLessThan operation.
+	           (no changes required) -->
+    
+	<complexType name="stockListType">
+		<sequence>
+			<element name="product" minOccurs="0" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="productId" type="xsd:int" />
+						<element name="quantity" type="xsd:int" />
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<!-- TODO: Examine the remaining elements and complex types.
+	           (no changes required) -->
+	           
+	<!-- wrapper for operation request message -->
+	
+	<element name="getStockItemsWithQuantityBetween">
+		<complexType>
+			<sequence>
+				<element name="min" type="xsd:int"></element>
+				<element name="max" type="xsd:int"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	 <!-- wrapper for operation response message -->
+	 
+	<element name="getStockItemsWithQuantityBetweenResponse">
+		<complexType>
+			<sequence>
+				<element name="stockList" type="tns:stockListType"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<!-- wrapper for operation request message -->
+	
+	<element name="isInStock">
+		<complexType>
+			<sequence>
+				<element name="productId" type="xsd:int"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<!-- wrapper for operation response message -->
+	
+	<element name="isInStockResponse">
+		<complexType>
+			<sequence>
+				<element name="inStock" type="xsd:boolean"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+</schema>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is simple WSDL document that you can use as a template for new services.
+     To add new web service operations, do the TODO steps 
+     TODO: change the namespace URI for the tns prefix and the targetNamespace attribute,
+           and change the name attribute -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://warehouse.rf.com/"
+	targetNamespace="http://warehouse.rf.com/"
+	name="StockService">
+	
+	<types>
+		<!--  TODO: Import your schema, and change the namespace attribute -->
+		<xsd:schema>
+			<xsd:import schemaLocation="stock.xsd"
+				    namespace="http://warehouse.rf.com/">
+			</xsd:import>
+		</xsd:schema>
+	</types>
+	
+	<!--  TODO: Copy the request and response messages and change the names. -->
+	<message name="getStockItemsWithQuantityLessThan">
+		<part element="tns:getStockItemsWithQuantityLessThan" name="parameters"/>
+	</message>
+
+	<message name="getStockItemsWithQuantityLessThanResponse">
+		<part element="tns:getStockItemsWithQuantityLessThanResponse" name="parameters"/>
+	</message>
+	
+	<!--  TODO: Change the portType name -->
+	<portType name="Stock">
+	
+		<!--  TODO: Copy the operation element and change the names -->
+		<operation name="getStockItemsWithQuantityLessThan">
+			<input message="tns:getStockItemsWithQuantityLessThan" />
+			<output message="tns:getStockItemsWithQuantityLessThanResponse" />
+		</operation>
+		
+	</portType>
+	
+	<!--  TODO: Change the binding and portType name -->
+	<binding name="StockPortBinding" type="tns:Stock">
+	
+		<soap:binding style="document"
+			          transport="http://schemas.xmlsoap.org/soap/http"/>
+			          
+		<!--  TODO: Copy the operation element and change the names -->
+		<operation name="getStockItemsWithQuantityLessThan">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		
+	</binding>
+	
+	<!--  TODO: Change service name, port name, binding, and address -->
+	<service name="StockService">
+		<port name="StockPort"
+			binding="tns:StockPortBinding">
+			<soap:address location="http://localhost:8080/warehouse/stock" />
+		</port>
+	</service>
+</definitions>

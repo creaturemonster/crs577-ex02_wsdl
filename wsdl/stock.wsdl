@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  TODO: Note the missing <definitions> attribute values:
+            1. name
+            2. target namespace
+      You'll set these attributes using using the graphical WSDL editor -->
+<definitions 
+    name=""
+    targetNamespace=""
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://warehouse.rf.com/">
+    
+    <types>
+        <xsd:schema>
+            <!--  TODO: Import schema 'stock.xsd' 
+                        Set schemaLocation to "stock.xsd"
+                        Set namespace to "http://warehouse.rf.com/"
+                  HINT: Remember the trailing "/" in the namespace
+                  HINT: see slide 2-31 -->
+             <xsd:import schemaLocation="stock.xsd"
+                        namespace="http://warehouse.rf.com/">
+            </xsd:import>
+              
+        </xsd:schema>
+    </types>
+    
+    <!--  TODO: Note request message for 'getStockItemsWithQuantityLessThan'. -->
+    <message name="getStockItemsWithQuantityLessThan">
+        <part element="tns:getStockItemsWithQuantityLessThan" name="parameters"/>
+    </message>
+
+    <!--  TODO: Note response message for 'getStockItemsWithQuantityLessThan'. -->
+    <message name="getStockItemsWithQuantityLessThanResponse">
+        <part element="tns:getStockItemsWithQuantityLessThanResponse" name="parameters"/>
+    </message>
+    
+    
+    
+    <portType name="Stock">
+    
+        <operation name="getStockItemsWithQuantityLessThan">
+            <input message="getStockItemsWithQuantityLessThan" name="parameters"></input>
+            <output
+                message="getStockItemsWithQuantityLessThanResponse" name="parameters">
+            </output>
+        </operation>
+        
+        <operation name="getStockItemsWithQuantityBetween">
+            <input message="tns:getStockItemsWithQuantityBetween" />
+            <output message="tns:getStockItemsWithQuantityBetweenResponse" />
+        </operation>
+        
+        <operation name="isInStock">
+            <input message="tns:isInStock" />
+            <output message="tns:isInStockResponse" />
+        </operation>
+
+
+    </portType>
+    
+    <binding name="StockPortBinding" type="tns:Stock">
+    
+        <!--  TODO: Note 'document' style and 'soap' transport -->
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+                      
+        <operation name="getStockItemsWithQuantityLessThan">
+            <soap:operation soapAction=""></soap:operation>
+            <input>
+                <soap:body use="literal"></soap:body>
+            </input>
+            <output>
+                <soap:body use="literal"></soap:body>
+            </output>
+        </operation>
+        
+        <!--  TODO: Add the two missing operations here -->
+		<operation name="getStockItemsWithQuantityBetween">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+        
+    </binding>
+    
+    <!--  TODO: Specify that service, port, binding are 
+          at http://localhost:8080/warehouse/stock -->
+    <service name="StockService">
+        <port name="StockPort"
+            binding="StockPortBinding">
+        	<soap:address location="http://localhost:8080/warehouse/stock" />
+
+        </port>
+    </service>
+    
+
+</definitions>
